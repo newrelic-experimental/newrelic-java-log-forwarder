@@ -26,7 +26,7 @@ This Java log forwarder plugin proves invaluable in scenarios where out-of-the-b
 # Installation Guide
 
 ## Step 1: Download and Extract the Release
-Download the release and extract the JAR file `log-forwarder-all.jar`.
+Download the [release](https://github.com/newrelic-experimental/newrelic-java-log-forwarder/releases) and extract the Zip file `log-forwarder-plugin-v.x.z.zip`.
 
 ## Step 2: Create a Configuration File `config.json`
 ```json
@@ -72,6 +72,14 @@ export LOG_CONFIG=config.json
 ## Step 4: Run the Log Forwarder
 ```bash
 java -jar log-forwarder-all.jar
+```
+## Sample command line output
+```bash
+Logging process started successfully...
+Sending 296 log events to New Relic...
+Logs sent to New Relic successfully: 2024-05-17T14:18:55.552
+Sending 48 log events to New Relic...
+Logs sent to New Relic successfully: 2024-05-17T14:22:57.194
 ```
 
 Follow these steps to install and configure the log forwarder for your Java application.
