@@ -1,3 +1,7 @@
+## Version: [v1.0.0](https://github.com/newrelic-experimental/newrelic-java-log-forwarder/releases/tag/v1.0.0) | Created: 2024-05-17
+### Features
+- Newrelic java log forwarder 1st iteration
+
 ## Installation
 
 To install:
