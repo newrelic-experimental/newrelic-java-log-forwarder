@@ -99,9 +99,7 @@ jobs:
       - name: Create Archive
         run: |
           echo "CURRENT=${PWD}" >> $GITHUB_ENV
-          repo_name2="${{ github.repository }}"
-          sanitized_repo_name2=$(echo "$repo_name" | awk -F 'newrelic-java-' '{print $2}')
-          cd ${HOME}/newrelic-java-${sanitized_repo_name2}/log-forwarder/build/libs/
+          cd ${HOME}/newrelic-java-log-forwarder/log-forwarder/build/libs/
           zip -r /tmp/to/${{ env.RELEASE_NAME}}${{ steps.set_tag.outputs.tag }}.zip *.jar
           cd ${{env.CURRENT}}
 
