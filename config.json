@@ -1,0 +1,22 @@
+{
+  "api_key": "ingest-key",
+  "application_name": "nrlabs-java-loggerv1.0",
+  "log_check_interval_ms": 120000,
+  "api_url": "https://log-api.newrelic.com/log/v1",
+  "log_files": [
+    {
+      "name": "mylog-file",
+      "file": "/Users/gsidhwani/Documents/GitHub/NR-LOG/newrelic-java-logger/mylog.log",
+      "attributes": {
+        "logtype": "custom"
+      }},
+{
+      "name": "mynginx-logs",
+      "file": "/Users/gsidhwani/Documents/GitHub/NR-LOG/newrelic-java-logger/xyz.log",
+      "attributes": {
+        "logtype": "nginx"
+      }
+    }
+  ]
+}
+
