@@ -99,7 +99,7 @@ jobs:
       - name: Create Archive
         run: |
           echo "CURRENT=${PWD}" >> $GITHUB_ENV
-          cd ${HOME}/newrelic-java-log-forwarder/log-forwarder/build/libs/
+          cd ${HOME}/log-forwarder/build/libs/
           zip -r /tmp/to/${{ env.RELEASE_NAME}}${{ steps.set_tag.outputs.tag }}.zip *.jar
           cd ${{env.CURRENT}}
 
