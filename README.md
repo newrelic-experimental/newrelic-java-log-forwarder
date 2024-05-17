@@ -17,62 +17,85 @@
 ![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/java-instrumentation-template)
 
 
-# [Project Name - use format "newrelic-java-<name>"] [build badges go here when available]
+# New Relic Java Log Forwarder
+Log Forwarder for AIX, HP-UX, Linux, OSX/MacOS & Solaris/SunOS
 
->[Brief description - what is the project and value does it provide? How often should users expect to get releases? How is versioning set up? Where does this project want to go?]
-
-## Value
-
-|Metrics | Events | Logs | Traces | Visualization | Automation |
-|:-:|:-:|:-:|:-:|:-:|:-:|
-|:x:|:x:|:x:|:white_check_mark:|:x:|:x:|
-
-### List of Metrics,Events,Logs,Traces
-|Name | Type | Description |
-|:-:|:-:|:-:|
-|*metric.name* | Metric| *description*|
-|*event.name* | Event|  *description*|
-|*log.name* | Log|  *description*|
-|*trace.name*| Trace| *description*
-|---|---|---|
+This Java log forwarder plugin proves invaluable in scenarios where out-of-the-box New Relic logging solutions are absent for specific platforms, such as AIX, HP-UX, Solaris, OSX/MacOS, and Linux operating systems. It seamlessly integrates into environments running JDK 8 (& above) , providing a straightforward configuration process and effortless execution. Whether encountering unique system configurations or exploring diverse platforms, this plugin stands as a reliable solution for forwarding logs to New Relic, ensuring comprehensive observability across a broad spectrum of systems.
 
 
-## Installation
+# Installation Guide
 
-> [Include a step-by-step procedure on how to get your code installed. Be sure to include any third-party dependencies that need to be installed separately]
+## Step 1: Download and Extract the Release
+Download the release and extract the JAR file `log-forwarder-all.jar`.
 
-## Getting Started
+## Step 2: Create a Configuration File `config.json`
+```json
+{
+  "api_key": "<ingest_key>",
+  "application_name": "nrlabs-java-loggerv1.0",
+  "log_check_interval_ms": 120000,
+  "api_url": "https://log-api.newrelic.com/log/v1",
+  "log_files": [
+    {
+      "name": "mylog-file",
+      "file": "/Users/gsidhwani/Documents/GitHub/NR-LOG/newrelic-java-logger/mylog.log",
+      "attributes": {
+        "logtype": "custom"
+      }
+    },
+    {
+      "name": "mynginx-logs",
+      "file": "/Users/gsidhwani/Documents/GitHub/NR-LOG/newrelic-java-logger/xyz.log",
+      "attributes": {
+        "logtype": "nginx"
+      }
+    }
+  ]
+}
+```
+- api_key: The API key used for authentication when sending logs to New Relic.
+- application_name: The name of the application or service from which the logs are being collected.
+- log_check_interval_ms: The interval, in milliseconds, at which the log forwarder checks for new log entries to send to New Relic.
+- api_url: The URL of the [New Relic log API endpoint](https://docs.newrelic.com/docs/logs/log-api/introduction-log-api/) where the logs will be sent.
+- log_files: An array of log files to be monitored and forwarded.
+- name: A descriptive name for the log file.
+- file: The absolute path to the log file on the file system.
+- attributes: Additional attributes or metadata associated with the log file, such as the [logtype](https://docs.newrelic.com/docs/logs/ui-data/parsing/#grok).
 
->[Simple steps to start working with the software similar to a "Hello World"]
+These parameters allow you to configure the log forwarder to monitor specific log files, collect log entries at regular intervals, and send them to New Relic for analysis and visualization. Adjust these settings according to your application's requirements and environment.
 
-## Usage
+## Step 3: Set Environment Variable `LOG_CONFIG`
+```bash
+export LOG_CONFIG=config.json  
+```
 
->[**Optional** - Include more thorough instructions on how to use the software. This section might not be needed if the Getting Started section is enough. Remove this section if it's not needed.]
+## Step 4: Run the Log Forwarder
+```bash
+java -jar log-forwarder-all.jar
+```
+
+Follow these steps to install and configure the log forwarder for your Java application.
 
 ## Building
+```bash
+./gradlew clean shadowJar
+```
+The jar log-forwarder/build/libs/log-forwarder-all.jar will be created.
 
->[**Optional** - Include this section if users will need to follow specific instructions to build the software from source. Be sure to include any third party build dependencies that need to be installed separately. Remove this section if it's not needed.]
+## Logs at New Relic Platform - A Sample
 
-## Testing
+<img width="1910" alt="image" src="https://github.com/newrelic-experimental/newrelic-java-log-forwarder/assets/113113837/6a482aec-9ef8-42bf-a443-627b82498f20">
 
->[**Optional** - Include instructions on how to run tests if we include tests with the codebase. Remove this section if it's not needed.]
 
 ## Support
 
 New Relic has open-sourced this project. This project is provided AS-IS WITHOUT WARRANTY OR DEDICATED SUPPORT. Issues and contributions should be reported to the project here on GitHub.
 
->[Choose 1 of the 2 options below for Support details, and remove the other one.]
-
->[Option 1 - no specific thread in Community]
 >We encourage you to bring your experiences and questions to the [Explorers Hub](https://discuss.newrelic.com) where our community members collaborate on solutions and new ideas.
-
->[Option 2 - thread in Community]
->New Relic hosts and moderates an online forum where customers can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub.
->You can find this project's topic/threads here: [URL for Community thread]
 
 ## Contributing
 
-We encourage your contributions to improve [Project Name]! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project. If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company, please drop us an email at opensource@newrelic.com.
+We encourage your contributions to improve Salesforce Commerce Cloud for New Relic Browser! Keep in mind when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. You only have to sign the CLA one time per project. If you have any questions, or to execute our corporate CLA, required if your contribution is on behalf of a company, please drop us an email at opensource@newrelic.com.
 
 **A note about vulnerabilities**
 
@@ -82,6 +105,5 @@ If you believe you have found a security vulnerability in this project or any of
 
 ## License
 
-[Project Name] is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
+New Relic Java Log Forwarder is licensed under the [Apache 2.0](http://apache.org/licenses/LICENSE-2.0.txt) License.
 
->[If applicable: [Project Name] also uses source code from third-party libraries. You can find full details on which libraries are used and the terms under which they are licensed in the third-party notices document.]
